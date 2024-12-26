@@ -8,6 +8,7 @@ class ListsController < ApplicationController
 
   # GET /lists/1 or /lists/1.json
   def show
+    @list = List.find(params[:id])
   end
 
   # GET /lists/new
@@ -49,10 +50,11 @@ class ListsController < ApplicationController
 
   # DELETE /lists/1 or /lists/1.json
   def destroy
+    @list = List.find(params[:id])
     @list.destroy
 
     respond_to do |format|
-      format.html { redirect_to lists_path, status: :see_other, notice: "List was successfully destroyed." }
+      format.html { redirect_to root_path, status: :see_other, notice: "List was successfully destroyed." }
       format.json { head :no_content }
     end
   end

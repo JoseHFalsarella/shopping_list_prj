@@ -1,37 +1,18 @@
-<%= form_with(model: item) do |form| %>
-  <% if item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
-
-      <ul>
-        <% item.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<%= form_with model: [@list, @list.items.build] do |form| %>
+  <div style="display: flex; width: 100%">
+    <div class="field" style="display: flex; width: 100%">
+      <%= form.text_field :name, placeholder: "Insira o Nome", style: "width: 100%" %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :quantity %>
-    <%= form.number_field :quantity %>
-  </div>
-
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.check_box :status %>
-  </div>
-
-  <div class="field">
-    <%= form.label :list_id %>
-    <%= form.text_field :list_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+    <div class="field">
+      <%= form.label :quantity %>
+      <%= form.number_field :quantity, value: 1, min: 1 %>
+    </div>
+      
+      <%= form.hidden_field :status, value: false %>
+    
+    <div>
+      <%= form.submit %>
+    </div>
   </div>
 <% end %>

@@ -1,0 +1,36 @@
+<% if item.persisted? %> 
+  <tr>
+    <% if item.name.present? %>
+      <td>
+        <%= item.name %>
+      </td>
+    <% end %>
+
+    <% if item.quantity.present? %>
+      <td>
+        <%= item.quantity %>
+      </td>
+    <% end %>
+
+    <td>
+      <%= form_with model: [item.list, item], url: list_item_path(item.list, item), method: :patch, remote: true do |form| %>
+
+        <%= form.hidden_field :list_id, value: item.list.id %>
+        <%= form.hidden_field :id, value: item.id %>
+        <%= form.hidden_field :name, value: item.name %>
+        <%= form.hidden_field :quantity, value: item.quantity %>
+
+        <%= form.check_box :status, { checked: item.status }, true, false %>
+        <%= form.hidden_field :status, value: false %>
+    </td>
+    <td>
+        <%= form.submit "Update" %>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to 'Del', list_item_path(item.list, item), method: :delete, data: { confirm: 'Are you sure you want to delete this item?' } %>
+    </td>
+  </tr>
+<% else %>
+  <p>Item information is unavailable.</p>
+<% end %>

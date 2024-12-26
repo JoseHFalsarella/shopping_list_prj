@@ -1,9 +1,44 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @list.name %>
-</p>
+<div class="container" style="display: flex; flex-direction: column">
+  <div class="header" style="display: flex;align-items: top; width: 100%; justify-content: space-between;">
+    <p style="margin: 0;">
+      <%= @list.name %>
+    </p>
 
-<%= link_to 'Edit', edit_list_path(@list) %> |
-<%= link_to 'Back', lists_path %>
+    <div>
+      <%= link_to 'Alterar Nome', edit_list_path(@list) %> |
+      <%= link_to 'Voltar', lists_path %>
+    </div>
+  </div>
+  
+
+  <h2> Adicione um item: </h2>
+
+  <%= render 'items/form', list: @list %>
+
+  <h2> Itens: </h2>
+  <% if @list.items.any? %>
+
+    <table style="width: 100%">
+      <thead>
+        <tr>
+          <th style="text-align: left; width: 100%">Nome</th>
+          <th style="text-align: left; min-width: 100px">Quantidade</th>
+          <th style="text-align: left; min-width: 60px">Status</th>
+          <th style="text-align: left; min-width: 100px">Update</th>
+          <th style="text-align: left; min-width: 100px">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @list.items.each do |item| %>
+          <%= render 'items/item', item: item %>
+        <% end %>
+      </tbody>
+    </table>
+    
+  <% else %>
+    <p>No items added yet.</p>
+  <% end %>
+
+</div>
