@@ -1,5 +1,5 @@
 <% if item.persisted? %> 
-  <tr>
+  <tr style="border: 1px solid gray" >
     <% if item.name.present? %>
       <td>
         <%= item.name %>
@@ -28,7 +28,7 @@
       <% end %>
     </td>
     <td>
-      <%= link_to 'Del', list_item_path(item.list, item), method: :delete, data: { confirm: 'Are you sure you want to delete this item?' } %>
+      <%= button_to 'Del', list_item_path(item.list, item), method: :delete %>
     </td>
   </tr>
 <% else %>

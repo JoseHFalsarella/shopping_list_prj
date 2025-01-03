@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<div class="container" style="display: flex; flex-direction: column">
+<div class="container" style="display: flex; flex-direction: column; padding: 10vh 15vw">
   <div class="header" style="display: flex;align-items: top; width: 100%; justify-content: space-between;">
-    <p style="margin: 0;">
+    <p style="margin: 0; font-weight: bold; font-size: 30px;">
       <%= @list.name %>
     </p>
 
@@ -27,7 +27,7 @@
           <th style="text-align: left; min-width: 100px">Quantidade</th>
           <th style="text-align: left; min-width: 60px">Status</th>
           <th style="text-align: left; min-width: 100px">Update</th>
-          <th style="text-align: left; min-width: 100px">Delete</th>
+          <th style="text-align: left; min-width: 60px">Delete</th>
         </tr>
       </thead>
       <tbody>

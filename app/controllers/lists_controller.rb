@@ -1,19 +1,20 @@
 class ListsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_list, only: %i[ show edit update destroy ]
+  before_action :correct_user, only: %i[ show edit update destroy ]
 
   # GET /lists or /lists.json
   def index
-    @lists = List.all
+    @lists = current_user.lists
   end
 
   # GET /lists/1 or /lists/1.json
   def show
-    @list = List.find(params[:id])
   end
 
   # GET /lists/new
   def new
-    @list = List.new
+    @list = current_user.lists.build
   end
 
   # GET /lists/1/edit
@@ -22,7 +23,7 @@ class ListsController < ApplicationController
 
   # POST /lists or /lists.json
   def create
-    @list = List.new(list_params)
+    @list = current_user.lists.build(list_params)
 
     respond_to do |format|
       if @list.save
@@ -50,7 +51,6 @@ class ListsController < ApplicationController
 
   # DELETE /lists/1 or /lists/1.json
   def destroy
-    @list = List.find(params[:id])
     @list.destroy
 
     respond_to do |format|
@@ -63,6 +63,11 @@ class ListsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_list
       @list = List.find(params[:id])
+    end
+
+    def correct_user
+      @list = current_user.lists.find_by(id: params[:id])
+      redirect_to lists_path, notice: "Not authorized to access this list" if @list.nil?
     end
 
     # Only allow a list of trusted parameters through.

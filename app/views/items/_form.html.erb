@@ -1,18 +1,17 @@
 <%= form_with model: [@list, @list.items.build] do |form| %>
-  <div style="display: flex; width: 100%">
+  <div style="display: flex; width: 100%; height: 40px; gap: 8px">
     <div class="field" style="display: flex; width: 100%">
-      <%= form.text_field :name, placeholder: "Insira o Nome", style: "width: 100%" %>
+      <%= form.text_field :name, placeholder: "Nome do item...", style: "width: 100%;" %>
     </div>
 
-    <div class="field">
-      <%= form.label :quantity %>
-      <%= form.number_field :quantity, value: 1, min: 1 %>
+    <div class="field" style="display: flex;">
+      <%= form.number_field :quantity, value: 1, min: 1, placeholder: "Quantidade..." %>
     </div>
       
       <%= form.hidden_field :status, value: false %>
     
     <div>
-      <%= form.submit %>
+      <%= form.submit "Adicionar", style: "height: 100%; padding: 0px 8px" %>
     </div>
   </div>
 <% end %>
